@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fastadeliveries.deliverymanapp"
+    package="com.fasta.fasta_rides_driverapp"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -37,7 +37,7 @@
 
     <application
         tools:replace="android:label"
-        android:label="Fasta Driver"
+        android:label="Fasta Courier"
         android:name="${applicationName}"
         android:extractNativeLibs="true"
         android:requestLegacyExternalStorage="true"
@@ -89,7 +89,7 @@
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <service
-            android:name="com.fastadeliveries.deliverymanapp.BackgroundService"
+            android:name="com.fasta.fasta_rides_driverapp.BackgroundService"
             android:enabled="true"
             android:exported="false" />
 

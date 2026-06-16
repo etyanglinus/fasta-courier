@@ -3,8 +3,8 @@ import 'package:fasta_deliveries_delivery/util/enums.dart';
 import 'package:fasta_deliveries_delivery/util/images.dart';
 
 class AppConstants {
-  static const String appName = 'Fasta Deliveries Driver';
-  static const double appVersion = 3.9;
+  static const String appName = 'Fasta Courier';
+  static const double appVersion = 4.0;
 
   /// Flutter SDK 3.41.8
   static const String fontFamily = 'Roboto';
@@ -12,7 +12,7 @@ class AppConstants {
 
   static const String baseUrl = 'https://fastadeliveries.nobo.co.ke';
 
-  static const String polylineMapKey = 'YOUR_MAP_KEY_HERE';
+  static const String polylineMapKey = 'AIzaSyA5_1pumdGfN39ABZQwKbKupwRIZ9824l8';
   static const String configUri = '/api/v1/config';
   static const String forgetPasswordUri =
       '/api/v1/auth/delivery-man/forgot-password';
@@ -264,8 +264,8 @@ class AppConstants {
 
   //Ride Status
 
-  // static const String pending = 'pending';
-  // static const String accepted = 'accepted';
+  static const String pending = 'pending';
+  static const String accepted = 'accepted';
   static const String outForPickup = 'out_for_pickup';
   static const String ongoing = 'ongoing';
   static const String completed = 'completed';
