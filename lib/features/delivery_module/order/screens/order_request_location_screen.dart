@@ -13,6 +13,7 @@ import 'package:fasta_deliveries_delivery/features/delivery_module/order/widgets
 import 'package:fasta_deliveries_delivery/features/profile/controllers/profile_controller.dart';
 import 'package:fasta_deliveries_delivery/util/images.dart';
 import 'package:fasta_deliveries_delivery/common/widgets/custom_app_bar_widget.dart';
+import 'package:fasta_deliveries_delivery/common/widgets/adaptive_map/adaptive_map.dart';
 
 class OrderRequestLocationScreen extends StatefulWidget {
   final OrderModel orderModel;
@@ -30,7 +31,7 @@ class OrderRequestLocationScreen extends StatefulWidget {
 
 class _OrderRequestLocationScreenState
     extends State<OrderRequestLocationScreen> {
-  GoogleMapController? _controller;
+  AdaptiveMapController? _controller;
   final Set<Marker> _markers = HashSet<Marker>();
   GlobalKey<ExpandableBottomSheetState> key =
       GlobalKey<ExpandableBottomSheetState>();
@@ -59,7 +60,7 @@ class _OrderRequestLocationScreenState
           key: key,
           background: Stack(
             children: [
-              GoogleMap(
+              AdaptiveMap(
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                     double.parse(
@@ -74,7 +75,7 @@ class _OrderRequestLocationScreenState
                 minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
                 zoomControlsEnabled: false,
                 markers: _markers,
-                onMapCreated: (GoogleMapController controller) {
+                onMapCreated: (AdaptiveMapController controller) {
                   _controller = controller;
                   setMarker(widget.orderModel, parcel);
                 },

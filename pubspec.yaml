@@ -26,6 +26,9 @@ dependencies:
   geolocator: ^14.0.2
   geocoding: ^4.0.0
   google_maps_flutter: ^2.14.0
+  # OpenStreetMap fallback when Google Maps billing/quota fails (see lib/common/widgets/adaptive_map/)
+  flutter_map: ^8.3.2
+  latlong2: ^0.9.1
   url_launcher: ^6.3.2
   vibration: ^3.1.6
   image_picker: ^1.2.1
