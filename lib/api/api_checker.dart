@@ -1,0 +1,23 @@
+import 'package:fasta_deliveries_delivery/api/api_client.dart';
+import 'package:fasta_deliveries_delivery/features/auth/controllers/auth_controller.dart';
+import 'package:fasta_deliveries_delivery/features/profile/controllers/profile_controller.dart';
+import 'package:fasta_deliveries_delivery/helper/route_helper.dart';
+import 'package:fasta_deliveries_delivery/common/widgets/custom_snackbar_widget.dart';
+import 'package:get/get.dart';
+
+class ApiChecker {
+  static void checkApi(Response response) {
+    if (response.statusCode == 401) {
+      Get.find<AuthController>().clearSharedData();
+      Get.find<ProfileController>().stopLocationRecord();
+      if (Get.currentRoute != RouteHelper.signIn) {
+        Get.offAllNamed(RouteHelper.getSignInRoute());
+      }
+      return;
+    }
+
+    showCustomSnackBar(
+      ApiClient.getErrorMessage(response.body) ?? response.statusText,
+    );
+  }
+}
