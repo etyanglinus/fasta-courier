@@ -998,5 +998,13 @@
   "any_query_feel_free_to_contact": "কোনো জিজ্ঞাসা আছে? যেকোনো সময় আমাদের কল বা মেইল করতে পারেন",
   "coupon_amount": "কুপন পরিমাণ",
   "express_delivery_charge": "এক্সপ্রেস ডেলিভারি চার্জ",
-  "slightly_delay_delivery": "সামান্য বিলম্বিত ডেলিভারি"
+  "slightly_delay_delivery": "সামান্য বিলম্বিত ডেলিভারি",
+  "cannot_carry_this": "বহন করতে পারবেন না?",
+  "cannot_carry_hint": "আপনার গাড়ি এই অর্ডার নিতে না পারলে আমরা এটি বড় গাড়িতে পাঠাব।",
+  "too_heavy": "খুব ভারী",
+  "too_big": "খুব বড়",
+  "other": "অন্যান্য",
+  "cannot_carry_note_hint": "এটি কী? (ঐচ্ছিক)",
+  "send_to_a_bigger_vehicle": "বড় গাড়িতে পাঠান",
+  "sent_to_a_bigger_vehicle": "বড় গাড়িতে পাঠানো হয়েছে"
 }

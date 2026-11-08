@@ -147,6 +147,23 @@ class OrderRepository implements OrderRepositoryInterface {
     return orderDetailsResponse;
   }
 
+  /// The rider's vehicle cannot carry this order (too heavy, too big …). The server hands it to
+  /// a bigger vehicle and flags it for admin. Only for orders no rider has taken yet.
+  @override
+  Future<ResponseModel> reportCannotCarry(int? orderID, String reason, String note) async {
+    Response response = await apiClient.postData(AppConstants.reportCannotCarryUri, {
+      "_method": "put",
+      'token': _getUserToken(),
+      'order_id': orderID,
+      'reason': reason,
+      if (note.trim().isNotEmpty) 'note': note.trim(),
+    }, handleError: false);
+    if (response.statusCode == 200) {
+      return ResponseModel(true, response.apiMessage);
+    }
+    return ResponseModel(false, response.statusText);
+  }
+
   @override
   Future<ResponseModel> acceptOrder(int? orderID) async {
     ResponseModel responseModel;

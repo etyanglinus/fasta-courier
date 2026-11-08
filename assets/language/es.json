@@ -998,5 +998,13 @@
   "any_query_feel_free_to_contact": "¿Tienes alguna duda? No dudes en llamarnos o enviarnos un correo",
   "coupon_amount": "Monto del cupón",
   "express_delivery_charge": "Cargo por entrega exprés",
-  "slightly_delay_delivery": "Entrega ligeramente retrasada"
+  "slightly_delay_delivery": "Entrega ligeramente retrasada",
+  "cannot_carry_this": "¿No puedes llevarlo?",
+  "cannot_carry_hint": "Si tu vehículo no puede llevar este pedido, lo enviaremos a un vehículo más grande.",
+  "too_heavy": "Demasiado pesado",
+  "too_big": "Demasiado grande",
+  "other": "Otro",
+  "cannot_carry_note_hint": "¿Qué es? (opcional)",
+  "send_to_a_bigger_vehicle": "Enviar a un vehículo más grande",
+  "sent_to_a_bigger_vehicle": "Enviado a un vehículo más grande"
 }

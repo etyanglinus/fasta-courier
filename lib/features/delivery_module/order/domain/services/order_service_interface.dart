@@ -30,6 +30,7 @@ abstract class OrderServiceInterface {
   );
   Future<OrderDetailsResponseModel?> getOrderDetails(int? orderID);
   Future<ResponseModel> acceptOrder(int? orderID);
+  Future<ResponseModel> reportCannotCarry(int? orderID, String reason, String note);
   List<IgnoreModel> getIgnoreList();
   void setIgnoreList(List<IgnoreModel> ignoreList);
   List<OrderModel> processLatestOrders(

@@ -998,5 +998,13 @@
   "any_query_feel_free_to_contact": "لديك أي استفسار؟ لا تتردد في الاتصال بنا أو مراسلتنا عبر البريد الإلكتروني",
   "coupon_amount": "قيمة القسيمة",
   "express_delivery_charge": "رسوم التوصيل السريع",
-  "slightly_delay_delivery": "توصيل متأخر قليلاً"
+  "slightly_delay_delivery": "توصيل متأخر قليلاً",
+  "cannot_carry_this": "لا يمكنك حمله؟",
+  "cannot_carry_hint": "إذا لم تستطع مركبتك حمل هذا الطلب، سنرسله إلى مركبة أكبر.",
+  "too_heavy": "ثقيل جدًا",
+  "too_big": "كبير جدًا",
+  "other": "أخرى",
+  "cannot_carry_note_hint": "ما هو؟ (اختياري)",
+  "send_to_a_bigger_vehicle": "أرسله إلى مركبة أكبر",
+  "sent_to_a_bigger_vehicle": "تم إرساله إلى مركبة أكبر"
 }

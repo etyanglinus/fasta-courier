@@ -370,6 +370,26 @@ class OrderController extends GetxController implements GetxService {
     }
   }
 
+  /// Hand an order the rider's vehicle cannot carry to a bigger vehicle; it leaves this list.
+  Future<bool> reportCannotCarry(int? orderID, int index, String reason, String note) async {
+    _isLoading = true;
+    update();
+    final ResponseModel responseModel = await orderServiceInterface.reportCannotCarry(orderID, reason, note);
+    if (responseModel.isSuccess) {
+      if (_latestOrderList != null && index < _latestOrderList!.length && _latestOrderList![index].id == orderID) {
+        _latestOrderList!.removeAt(index);
+      } else {
+        _latestOrderList?.removeWhere((o) => o.id == orderID);
+      }
+      showCustomSnackBar(responseModel.message ?? 'sent_to_a_bigger_vehicle'.tr, isError: false);
+    } else {
+      showCustomSnackBar(responseModel.message, isError: true);
+    }
+    _isLoading = false;
+    update();
+    return responseModel.isSuccess;
+  }
+
   Future<bool> acceptOrder(
     int? orderID,
     int index,

@@ -21,6 +21,7 @@ import 'package:fasta_deliveries_delivery/features/delivery_module/order/screens
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fasta_deliveries_delivery/features/delivery_module/order/screens/order_location_screen.dart';
+import 'package:fasta_deliveries_delivery/features/delivery_module/order/widgets/cannot_carry_sheet_widget.dart';
 
 class OrderRequestWidget extends StatelessWidget {
   final OrderModel orderModel;
@@ -499,6 +500,22 @@ class OrderRequestWidget extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+
+              // The rider's vehicle cannot take this order: pass it to a bigger vehicle.
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton.icon(
+                  onPressed: () => CannotCarrySheetWidget.show(orderModel, index),
+                  icon: Icon(Icons.scale_outlined, size: 16, color: Theme.of(context).hintColor),
+                  label: Text(
+                    'cannot_carry_this'.tr,
+                    style: robotoRegular.copyWith(
+                      fontSize: Dimensions.fontSizeSmall,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ),
                 ),
               ),
             ],

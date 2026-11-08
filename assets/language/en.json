@@ -1008,5 +1008,13 @@
   "any_query_feel_free_to_contact": "Any query? Feel free to call or mail Us",
   "coupon_amount": "Coupon Amount",
   "express_delivery_charge": "Express Delivery Charge",
-  "slightly_delay_delivery": "Slightly Delay Delivery"
+  "slightly_delay_delivery": "Slightly Delay Delivery",
+  "cannot_carry_this": "Can't carry this?",
+  "cannot_carry_hint": "If your vehicle can't take this order, we'll send it to a bigger vehicle.",
+  "too_heavy": "Too heavy",
+  "too_big": "Too big",
+  "other": "Other",
+  "cannot_carry_note_hint": "What is it? (optional)",
+  "send_to_a_bigger_vehicle": "Send to a bigger vehicle",
+  "sent_to_a_bigger_vehicle": "Sent to a bigger vehicle"
 }

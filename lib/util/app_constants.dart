@@ -35,6 +35,7 @@ class AppConstants {
   static const String orderDetailsUri =
       '/api/v1/delivery-man/order-details?token=';
   static const String acceptOrderUri = '/api/v1/delivery-man/accept-order';
+  static const String reportCannotCarryUri = '/api/v1/delivery-man/report-cannot-carry';
   static const String activeStatusUri =
       '/api/v1/delivery-man/update-active-status';
   static const String updateProfileUri = '/api/v1/delivery-man/update-profile';

@@ -72,6 +72,11 @@ class OrderService implements OrderServiceInterface {
   }
 
   @override
+  Future<ResponseModel> reportCannotCarry(int? orderID, String reason, String note) async {
+    return await orderRepositoryInterface.reportCannotCarry(orderID, reason, note);
+  }
+
+  @override
   Future<ResponseModel> acceptOrder(int? orderID) async {
     return await orderRepositoryInterface.acceptOrder(orderID);
   }

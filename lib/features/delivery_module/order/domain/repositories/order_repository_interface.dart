@@ -1,3 +1,4 @@
+import 'package:fasta_deliveries_delivery/common/models/response_model.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fasta_deliveries_delivery/api/api_client.dart';
@@ -22,6 +23,7 @@ abstract class OrderRepositoryInterface implements RepositoryInterface {
   );
   Future<dynamic> getOrderDetails(int? orderID);
   Future<dynamic> acceptOrder(int? orderID);
+  Future<ResponseModel> reportCannotCarry(int? orderID, String reason, String note);
   List<IgnoreModel> getIgnoreList();
   void setIgnoreList(List<IgnoreModel> ignoreList);
   Future<ParcelCancellationReasonsModel?> getParcelCancellationReasons({
