@@ -54,8 +54,7 @@ class SplashController extends GetxController implements GetxService {
               ) ??
               false);
 
-      if (isMaintenanceMode) {
-        print("maintenance mood on");
+      if (isInMaintenance) {
         Get.offNamed(RouteHelper.getUpdateRoute(false));
       } else if ((Get.currentRoute.contains(RouteHelper.update) &&
               !isMaintenanceMode) ||

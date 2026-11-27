@@ -1009,8 +1009,6 @@
   "coupon_amount": "Coupon Amount",
   "express_delivery_charge": "Express Delivery Charge",
   "slightly_delay_delivery": "Slightly Delay Delivery",
-  "help_and_faqs": "Help & FAQs",
-  "news_and_updates": "News & updates",
-  "nothing_here_yet": "Nothing here yet.",
-  "dismiss": "Dismiss"
+  "couldnt_reach_server": "We couldn't reach Fasta right now. We'll keep trying.",
+  "retry": "Retry"
 }
