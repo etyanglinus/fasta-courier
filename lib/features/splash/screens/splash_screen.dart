@@ -9,6 +9,7 @@ import 'package:fasta_deliveries_delivery/helper/notification_helper.dart';
 import 'package:fasta_deliveries_delivery/helper/pusher_helper.dart';
 import 'package:fasta_deliveries_delivery/helper/route_helper.dart';
 import 'package:fasta_deliveries_delivery/util/app_constants.dart';
+import 'package:fasta_deliveries_delivery/util/enums.dart';
 import 'package:fasta_deliveries_delivery/util/dimensions.dart';
 import 'package:fasta_deliveries_delivery/util/images.dart';
 import 'package:fasta_deliveries_delivery/util/styles.dart';
@@ -26,6 +27,14 @@ class SplashScreen extends StatefulWidget {
 class SplashScreenState extends State<SplashScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   StreamSubscription<List<ConnectivityResult>>? _onConnectivityChanged;
+
+  /// Set when `/config` fails (5xx, timeout, bad body). Before this the courier
+  /// was left on the logo with nothing to tap: no other path on this screen
+  /// reacts to a failed config call.
+  bool _configFailed = false;
+  bool _isRouting = false;
+  int _configAttempts = 0;
+  Timer? _retryTimer;
 
   @override
   void initState() {
@@ -71,13 +80,40 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    super.dispose();
-
     _onConnectivityChanged?.cancel();
+    _retryTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Retries after 2, 4, 8, 16 then every 30 seconds.
+  void _onConfigFailed() {
+    if (!mounted) return;
+    _configAttempts++;
+    setState(() => _configFailed = true);
+    _retryTimer?.cancel();
+    final int seconds = _configAttempts >= 5 ? 30 : (1 << _configAttempts);
+    _retryTimer = Timer(Duration(seconds: seconds), _route);
+  }
+
+  void _retryNow() {
+    _retryTimer?.cancel();
+    _route();
   }
 
   void _route() {
-    Get.find<SplashController>().getConfigData().then((isSuccess) async {
+    if (_isRouting) return;
+    _isRouting = true;
+    if (_configFailed && mounted) setState(() => _configFailed = false);
+    Get.find<SplashController>().getConfigData().catchError((Object e) {
+      debugPrint('====> Config load threw: $e');
+      return false;
+    }).then((isSuccess) async {
+      _isRouting = false;
+      if (!isSuccess) {
+        _onConfigFailed();
+        return;
+      }
+      _configAttempts = 0;
       if (isSuccess) {
         if (Get.find<AuthController>().getUserToken().isNotEmpty &&
             (Get.find<SplashController>().configModel?.webSocketStatus ??
@@ -91,8 +127,21 @@ class SplashScreenState extends State<SplashScreen> {
               Get.find<SplashController>().configModel?.maintenanceMode ??
               false;
           bool needsUpdate = AppConstants.appVersion < minimumVersion;
+          // Maintenance is switched on per app in the admin panel. Only lock
+          // couriers out when this app is on that list, not when maintenance
+          // is on for, say, the customer web alone.
+          final String platform = AppConstants.appMode == AppMode.delivery
+              ? 'deliveryman_app'
+              : 'rider_app';
+          final bool inMaintenanceForApp = isMaintenanceMode &&
+              (Get.find<SplashController>()
+                      .configModel
+                      ?.maintenanceModeData
+                      ?.maintenanceSystemSetup
+                      ?.contains(platform) ??
+                  false);
 
-          if (needsUpdate || isMaintenanceMode) {
+          if (needsUpdate || inMaintenanceForApp) {
             Get.offNamed(RouteHelper.getUpdateRoute(needsUpdate));
           } else {
             if (widget.body != null) {
@@ -193,7 +242,20 @@ class SplashScreenState extends State<SplashScreen> {
                 style: robotoMedium,
                 textAlign: TextAlign.center,
               ),
-              // Text('suffix_name'.tr, style: robotoMedium, textAlign: TextAlign.center),
+              if (_configFailed) ...[
+                const SizedBox(height: Dimensions.paddingSizeLarge),
+                Text(
+                  'couldnt_reach_server'.tr,
+                  style: robotoRegular,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: Dimensions.paddingSizeSmall),
+                TextButton.icon(
+                  onPressed: _retryNow,
+                  icon: const Icon(Icons.refresh),
+                  label: Text('retry'.tr),
+                ),
+              ],
             ],
           ),
         ),
