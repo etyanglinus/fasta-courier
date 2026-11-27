@@ -998,5 +998,9 @@
   "any_query_feel_free_to_contact": "কোনো জিজ্ঞাসা আছে? যেকোনো সময় আমাদের কল বা মেইল করতে পারেন",
   "coupon_amount": "কুপন পরিমাণ",
   "express_delivery_charge": "এক্সপ্রেস ডেলিভারি চার্জ",
-  "slightly_delay_delivery": "সামান্য বিলম্বিত ডেলিভারি"
+  "slightly_delay_delivery": "সামান্য বিলম্বিত ডেলিভারি",
+  "help_and_faqs": "Help & FAQs",
+  "news_and_updates": "News & updates",
+  "nothing_here_yet": "Nothing here yet.",
+  "dismiss": "Dismiss"
 }

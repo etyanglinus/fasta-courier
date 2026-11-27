@@ -876,6 +876,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             ProfileButtonWidget(
                               iconImage: Images.document,
+                              title: 'help_and_faqs'.tr,
+                              onTap: () => Get.toNamed(RouteHelper.cmsFaq),
+                            ),
+                            const SizedBox(height: Dimensions.paddingSizeSmall),
+                            ProfileButtonWidget(
+                              iconImage: Images.document,
+                              title: 'news_and_updates'.tr,
+                              onTap: () => Get.toNamed(RouteHelper.cmsNews),
+                            ),
+                            const SizedBox(height: Dimensions.paddingSizeSmall),
+                            ProfileButtonWidget(
+                              iconImage: Images.document,
                               title: 'privacy_policy'.tr,
                               onTap: () {
                                 Get.toNamed(RouteHelper.getPrivacyRoute());

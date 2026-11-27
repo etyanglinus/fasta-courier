@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fasta_deliveries_delivery/features/cms/cms_content.dart';
 import 'package:fasta_deliveries_delivery/features/auth/screens/dm_registration_success_screen.dart';
 import 'package:fasta_deliveries_delivery/features/disbursement/domain/models/disbursement_method_model.dart';
 import 'package:fasta_deliveries_delivery/features/earning_reports/screens/earning_report_screen.dart';
@@ -34,6 +35,8 @@ import 'package:fasta_deliveries_delivery/features/update/screens/update_screen.
 import 'package:get/get.dart';
 
 class RouteHelper {
+  static const String cmsFaq = '/help-faqs';
+  static const String cmsNews = '/news';
   static const String initial = '/';
   static const String splash = '/splash';
   static const String signIn = '/sign-in';
@@ -154,6 +157,8 @@ class RouteHelper {
   static String getEarningReportRoute() => earningReport;
 
   static List<GetPage> routes = [
+    GetPage(name: cmsFaq, page: () => const CmsListScreen(type: 'faq')),
+    GetPage(name: cmsNews, page: () => const CmsListScreen(type: 'news')),
     GetPage(
       name: initial,
       page: () => DashboardScreen(
