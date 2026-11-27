@@ -1,4 +1,5 @@
 import 'package:permission_handler/permission_handler.dart';
+import 'package:fasta_deliveries_delivery/features/cms/cms_content.dart';
 import 'package:fasta_deliveries_delivery/features/auth/controllers/auth_controller.dart';
 import 'package:fasta_deliveries_delivery/features/dashboard/screens/dashboard_screen.dart';
 import 'package:fasta_deliveries_delivery/features/home/widgets/active_order_widget.dart';
@@ -191,6 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (notificationController) {
                     return Stack(
                       children: [
+                        const CmsAnnouncementBanner(),
                         Icon(
                           Icons.notifications,
                           size: 25,
