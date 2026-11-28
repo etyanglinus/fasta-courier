@@ -1,4 +1,5 @@
 import 'package:fasta_deliveries_delivery/features/language/domain/models/language_model.dart';
+import 'package:fasta_deliveries_delivery/util/app_mode_store.dart';
 import 'package:fasta_deliveries_delivery/util/enums.dart';
 import 'package:fasta_deliveries_delivery/util/images.dart';
 
@@ -6,7 +7,8 @@ class AppConstants {
   static const String appName = 'Fasta Deliveries Driver';
   static const double appVersion = 5.2; // Flutter SDK 3.47.5
   static const String fontFamily = 'Roboto';
-  static const AppMode appMode = AppMode.delivery;
+  /// Deliveries or rides, from the signed-in account (see AppModeStore).
+  static AppMode get appMode => AppModeStore.current;
 
   static const String baseUrl = 'https://fastadeliveries.co.ke';
 
