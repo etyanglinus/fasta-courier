@@ -1,3 +1,4 @@
+import 'package:fasta_deliveries_delivery/util/app_mode_store.dart';
 import 'dart:convert';
 import 'package:fasta_deliveries_delivery/common/controllers/theme_controller.dart';
 import 'package:fasta_deliveries_delivery/api/api_client.dart';
@@ -112,6 +113,7 @@ import 'package:get/get.dart';
 Future<Map<String, Map<String, String>>> init() async {
   /// Core
   final sharedPreferences = await SharedPreferences.getInstance();
+  AppModeStore.load(sharedPreferences);
   Get.lazyPut(() => sharedPreferences);
   Get.lazyPut(
     () => ApiClient(

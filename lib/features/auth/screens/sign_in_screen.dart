@@ -4,7 +4,7 @@ import 'package:fasta_deliveries_delivery/features/profile/controllers/profile_c
 import 'package:fasta_deliveries_delivery/features/splash/controllers/splash_controller.dart';
 import 'package:fasta_deliveries_delivery/helper/custom_validator_helper.dart';
 import 'package:fasta_deliveries_delivery/helper/route_helper.dart';
-import 'package:fasta_deliveries_delivery/util/app_constants.dart';
+import 'package:fasta_deliveries_delivery/util/app_mode_store.dart';
 import 'package:fasta_deliveries_delivery/util/dimensions.dart';
 import 'package:fasta_deliveries_delivery/util/enums.dart';
 import 'package:fasta_deliveries_delivery/util/images.dart';
@@ -61,11 +61,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isRideActive = AppConstants.appMode == AppMode.ride;
     final config = Get.find<SplashController>().configModel;
-    bool isSelfRegistrationActive = isRideActive
-        ? (config?.toggleRiderRegistration ?? false)
-        : (config?.toggleDmRegistration ?? false);
+    final bool courierSignUp = config?.toggleDmRegistration ?? false;
+    final bool driverSignUp = config?.toggleRiderRegistration ?? false;
 
     return Scaffold(
       body: SafeArea(
@@ -178,62 +176,51 @@ class _SignInScreenState extends State<SignInScreen> {
                         context,
                       ),
                     ),
-                    SizedBox(
-                      height: isSelfRegistrationActive
-                          ? Dimensions.paddingSizeSmall
-                          : 0,
-                    ),
-
-                    isSelfRegistrationActive
-                        ? Text(
-                            'or'.tr,
-                            style: robotoRegular.copyWith(
-                              color: Theme.of(context).disabledColor,
-                            ),
-                          )
-                        : const SizedBox(),
-
-                    isSelfRegistrationActive
-                        ? TextButton(
-                            style: TextButton.styleFrom(
-                              minimumSize: const Size(1, 40),
-                            ),
-                            onPressed: () {
-                              Get.toNamed(
-                                RouteHelper.getDeliverymanRegistrationRoute(),
-                              );
-                            },
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: '${'join_as_a'.tr} ',
-                                    style: robotoRegular.copyWith(
-                                      color: Theme.of(context).disabledColor,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: isRideActive
-                                        ? "rider".tr
-                                        : 'delivery_man'.tr,
-                                    style: robotoBold.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Theme.of(
-                                        context,
-                                      ).primaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : const SizedBox(),
+                    if (courierSignUp || driverSignUp) ...[
+                      const SizedBox(height: Dimensions.paddingSizeSmall),
+                      Text(
+                        'or'.tr,
+                        style: robotoRegular.copyWith(
+                          color: Theme.of(context).disabledColor,
+                        ),
+                      ),
+                    ],
+                    if (courierSignUp) _joinLink(context, AppMode.delivery),
+                    if (driverSignUp) _joinLink(context, AppMode.ride),
                   ],
                 );
               },
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  /// "Join as a courier / driver": picks the registration form, then opens it.
+  Widget _joinLink(BuildContext context, AppMode mode) {
+    return TextButton(
+      style: TextButton.styleFrom(minimumSize: const Size(1, 40)),
+      onPressed: () async {
+        await AppModeStore.set(mode);
+        Get.toNamed(RouteHelper.getDeliverymanRegistrationRoute());
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: '${'join_as_a'.tr} ',
+              style: robotoRegular.copyWith(color: Theme.of(context).disabledColor),
+            ),
+            TextSpan(
+              text: mode == AppMode.ride ? 'rider'.tr : 'delivery_man'.tr,
+              style: robotoBold.copyWith(
+                color: Theme.of(context).primaryColor,
+                decoration: TextDecoration.underline,
+                decorationColor: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -249,9 +236,8 @@ class _SignInScreenState extends State<SignInScreen> {
   ) async {
     String phone = phoneText.text.trim();
     String password = passText.text.trim();
-    String type = AppConstants.appMode == AppMode.delivery
-        ? AppConstants.isDelivery
-        : AppConstants.isRide;
+    // The account decides deliveries or rides (login answers with account_type).
+    const String type = 'auto';
 
     String numberWithCountryCode = countryDialCode + phone;
     PhoneValid phoneValid = await CustomValidator.isPhoneValid(

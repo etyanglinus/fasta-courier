@@ -1,3 +1,4 @@
+import 'package:fasta_deliveries_delivery/util/app_mode_store.dart';
 import 'dart:async';
 import 'package:fasta_deliveries_delivery/api/api_client.dart';
 import 'package:fasta_deliveries_delivery/api/api_response_extension.dart';
@@ -97,6 +98,8 @@ class AuthController extends GetxController implements GetxService {
         PusherHelper.initializePusher();
       }
 
+      // Before the token is saved and topics are subscribed: both depend on the mode.
+      await AppModeStore.set(AppModeStore.fromAccountType(response.content['account_type']));
       authServiceInterface.saveUserToken(
         '${response.content['token'] ?? ''}',
         '${response.content['zone_topic'] ?? ''}',
