@@ -1000,5 +1000,8 @@
   "express_delivery_charge": "এক্সপ্রেস ডেলিভারি চার্জ",
   "slightly_delay_delivery": "সামান্য বিলম্বিত ডেলিভারি",
   "couldnt_reach_server": "We couldn't reach Fasta right now. We'll keep trying.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "trip_details": "ট্রিপের বিবরণ",
+  "fare": "ভাড়া",
+  "my_rides": "আমার রাইড"
 }

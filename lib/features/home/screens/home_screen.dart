@@ -1,3 +1,4 @@
+import 'package:fasta_deliveries_delivery/features/ride_module/ride_order/controllers/driver_ride_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fasta_deliveries_delivery/features/cms/cms_content.dart';
 import 'package:fasta_deliveries_delivery/features/auth/controllers/auth_controller.dart';
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Get.find<OrderController>().removeFromIgnoreList();
 
     if (isRideActive) {
+      Get.find<DriverRideController>().loadMyRides();
       Get.find<RideController>().getLastRideDetail();
       Get.find<TripController>().getDailyLog();
       Get.find<TripController>().rideCancellationReasonList();

@@ -1000,5 +1000,8 @@
   "express_delivery_charge": "رسوم التوصيل السريع",
   "slightly_delay_delivery": "توصيل متأخر قليلاً",
   "couldnt_reach_server": "We couldn't reach Fasta right now. We'll keep trying.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "trip_details": "تفاصيل الرحلة",
+  "fare": "الأجرة",
+  "my_rides": "رحلاتي"
 }

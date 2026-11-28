@@ -1010,5 +1010,8 @@
   "express_delivery_charge": "Express Delivery Charge",
   "slightly_delay_delivery": "Slightly Delay Delivery",
   "couldnt_reach_server": "We couldn't reach Fasta right now. We'll keep trying.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "trip_details": "Trip details",
+  "fare": "Fare",
+  "my_rides": "My rides"
 }

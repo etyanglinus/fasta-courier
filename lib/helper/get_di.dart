@@ -1,3 +1,4 @@
+import 'package:fasta_deliveries_delivery/features/ride_module/ride_order/controllers/driver_ride_controller.dart';
 import 'package:fasta_deliveries_delivery/util/app_mode_store.dart';
 import 'dart:convert';
 import 'package:fasta_deliveries_delivery/common/controllers/theme_controller.dart';
@@ -413,6 +414,7 @@ Future<Map<String, Map<String, String>>> init() async {
     () => AddVehicleController(addVehicleServiceInterface: Get.find()),
   );
   Get.lazyPut(() => RideController(rideOrderServiceInterface: Get.find()));
+  Get.lazyPut(() => DriverRideController(apiClient: Get.find()), fenix: true);
   Get.lazyPut(() => TripController(tripServiceInterface: Get.find()));
   Get.lazyPut(
     () => SafetyAlertController(safetyAlertServiceInterface: Get.find()),
